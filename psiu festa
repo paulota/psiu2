@@ -1,0 +1,107 @@
+//BAILE DO PSSIL 2 ''O RETORNO ''
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include<stdbool.h> //Biblioteca para usar booleanos
+
+
+
+int main(){
+	printf("BEM VINDO AO BAILE DO PSSIL 2 'O RETORNO' ");//titulo do programa
+	printf("\n");//quebra de linha
+
+	int n; // representa o numero de participantes
+	printf("Quantas pessoas vao participar ?"); // pergunta quantos covidados ao usuario
+	scanf("%i",&n);//guarda o numero de convidados
+
+	char nome[15][n]; //Arrays Nomes de ate 15 caracteres de tamanho
+
+	char sexo[n]; //Arrays de sexo, MASCULINO, FEMININO E NÃO BINARIO
+
+	int idade[n]; //Arrays de idade dos convidados
+	int hora[n], saida[n];   //Arrays de Hora de chegada e saida na festa
+	int preco; //variavel do preço do ingresso
+	int codigo[n];//Arrays codigo do convite
+  int detalhar; //variavel de tomada de escolha
+
+	bool per_beber, bebida = true , resp; //booleanos de verificação
+
+
+
+
+
+
+	printf("Insira os codigos :"); // codigo do ingresso
+	for(int i= 0; i < n; i = i+1){ //armazenando o codigo em diferentes posições do vetor
+		scanf("%d",&codigo[i]);
+	}
+	printf("Digite 1 para salvar dados dos convidados e 0 para terminar: "); //Cadastrar convidados no sistema para futuras festa
+		scanf("%i",&resp);
+		int l = n; //copiando constante
+	if(resp){
+		for(int i = 0; i < l;i++){ //Entrada de dados
+			printf("Nome: ");
+				scanf("%s",&nome[i]);
+			printf("Digite o sexo, M-Mulher, H-Homem, B-Nao Bimario : ");
+	 			scanf("%s",&sexo[i]);
+	 		printf("Digite a idade: ");
+	 			scanf("%d",&idade);
+	 		printf("Hora de Entrada : ");
+			 	scanf("%d",&hora[i]);
+			printf("Hora de Saida : ");
+			 	scanf("%d",&saida[i]);
+			}
+
+		for(int i = 0; i < l;i=i+1){ //imprimindo codigos na tela do usuario
+			printf("CODIGO DO CONVIDADO:%d",codigo[i]);
+			printf("\n");
+		}
+		printf("Insira o codigo que deseja detalhar : "); //escolha de uma posição do vetor
+			scanf("%d",&detalhar);
+
+		for(int i = 0; i < l;i=i+1){ //comparando e imprimindo dados solicitados
+			if(codigo[i] == detalhar){ //buscando o codigo escolhido pelo usuario
+				if(idade[i] > 17){ //verificando se é maior de idade
+					per_beber = true;
+				}else {
+					per_beber = false;
+				}
+				if(per_beber){
+					printf("TEM PERMISSAO PARA BEBER");
+					printf("\n");
+				}
+				if(sexo[i] == 'H' || sexo[i] == 'B'){ //verificação de sexo para privilegios
+					preco = 50;
+					bebida = false;
+					printf("PRECO DE ENTRADA :%d",preco);
+					printf("\n");
+					printf("TEMPO DE PERMANENCIA NA FESTA EM HORAS :%d",(saida[i]-hora[i]));
+					printf("\n");
+					if(bebida == 0 && idade[i] > 18){
+						printf("Desconto de 5 reais na primeira bebida");
+					}else {
+						printf("Direito a um refrigerante gratis");
+					}
+				}
+				if(sexo[i] == 'M' ){ //verificação de sexo para privilegios da mulher
+					preco = 25;
+					printf("PRECO DE ENTRADA :%d",preco);
+					printf("\n");
+					printf("TEMPO DE PERMANENCIA NA FESTA EM HORAS :%d",(saida[i]-hora[i])); //calcula media de horas do convidado
+					printf("\n");
+					if(bebida && idade[i] > 18) {
+						printf("Direito a uma bebida gratis");
+					}else {
+						printf("Direito a um Refrigerante gratis");
+					}
+				}
+			}
+		}
+
+	}else{
+		printf("OBRIGADO, VOLTE SEMPRE!!! ");
+	}
+
+	return 0;
+}
